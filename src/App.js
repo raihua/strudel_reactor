@@ -17,6 +17,7 @@ import MusicControls from "./components/MusicControls";
 
 export default function StrudelDemo() {
   const globalEditorRef = useRef(null);
+  const strudelCodeRef = useRef(stranger_tune);
   const hasRun = useRef(false);
 
   function initStrudelMirrorCanvas() {
@@ -52,7 +53,7 @@ export default function StrudelDemo() {
       },
     });
 
-    globalEditorRef.current.setCode(stranger_tune);
+    globalEditorRef.current.setCode(strudelCodeRef.current);
   }
 
   useEffect(() => {
@@ -67,8 +68,8 @@ export default function StrudelDemo() {
       <h2>Strudel Demo</h2>
       <main>
         <div className="container-fluid">
-          <MusicControls globalEditorRef={globalEditorRef} />
-          <TextPreprocessor globalEditorRef={globalEditorRef} />
+          <MusicControls globalEditorRef={globalEditorRef} strudelCodeRef={strudelCodeRef} />
+          <TextPreprocessor globalEditorRef={globalEditorRef}  strudelCodeRef={strudelCodeRef}/>
           <div className="row">
             <div
               className="col-md-8"

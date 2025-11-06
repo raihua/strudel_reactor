@@ -1,6 +1,7 @@
 import { stranger_tune } from "./../tunes";
+import { ProcessStudelCode } from "../utils/preprocessors"; 
 
-export default function TextPreprocessor({ globalEditorRef }) {
+export default function TextPreprocessor({ globalEditorRef, strudelCodeRef }) {
   return (
     <div className="row">
       <div
@@ -13,9 +14,9 @@ export default function TextPreprocessor({ globalEditorRef }) {
         <textarea
           className="form-control"
           rows="15"
-          id="proc"
-          defaultValue={stranger_tune}
-        ></textarea>
+        >
+          {strudelCodeRef.current}
+        </textarea>
       </div>
     </div>
   );
