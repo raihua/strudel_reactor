@@ -1,4 +1,5 @@
 import { processStudelCode } from "../utils/preprocessors";
+import SongSelector from "./SongSelector";
 
 export default function MusicControls({ globalEditorRef, strudelCodeRef }) {
   function procPlay() {
@@ -10,6 +11,7 @@ export default function MusicControls({ globalEditorRef, strudelCodeRef }) {
     <div className="row">
       <div className="col-md-4">
         <nav>
+          <SongSelector globalEditorRef={globalEditorRef} strudelCodeRef={strudelCodeRef}/>
           <button
             className="btn btn-outline-primary"
             onClick={procPlay}
