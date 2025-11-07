@@ -1,7 +1,9 @@
 import { stranger_tune } from "./../tunes";
 import { ProcessStudelCode } from "../utils/preprocessors"; 
+import { useEffect, useState } from "react";
 
-export default function TextPreprocessor({ globalEditorRef, strudelCodeRef }) {
+export default function TextPreprocessor({ globalEditorRef, strudelCode }) {
+
   return (
     <div className="row">
       <div
@@ -14,8 +16,8 @@ export default function TextPreprocessor({ globalEditorRef, strudelCodeRef }) {
         <textarea
           className="form-control"
           rows="15"
+          value={strudelCode}
         >
-          {strudelCodeRef.current}
         </textarea>
       </div>
     </div>

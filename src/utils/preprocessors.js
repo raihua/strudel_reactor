@@ -1,3 +1,3 @@
-export function processStudelCode(globalEditorRef, strudelCodeRef) {
-  globalEditorRef.current.setCode(strudelCodeRef.current);
+export function processStudelCode(globalEditorRef, strudelCode) {
+  globalEditorRef.current.setCode(strudelCode);
 }

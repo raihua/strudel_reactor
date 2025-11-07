@@ -1,7 +1,7 @@
 import "./App.css";
 import { useEffect, useRef, useState } from "react";
 import { StrudelMirror } from "@strudel/codemirror";
-import { evalScope } from "@strudel/core";
+import { evalScope, set } from "@strudel/core";
 import { drawPianoroll } from "@strudel/draw";
 import { initAudioOnFirstClick } from "@strudel/webaudio";
 import { transpiler } from "@strudel/transpiler";
@@ -17,7 +17,7 @@ import MusicControls from "./components/MusicControls";
 
 export default function StrudelDemo() {
   const globalEditorRef = useRef(null);
-  const strudelCodeRef = useRef(stranger_tune);
+  const [strudelCode, setStrudelCode] = useState(stranger_tune);
   const hasRun = useRef(false);
 
   function initStrudelMirrorCanvas() {
@@ -53,7 +53,7 @@ export default function StrudelDemo() {
       },
     });
 
-    globalEditorRef.current.setCode(strudelCodeRef.current);
+    globalEditorRef.current.setCode(strudelCode);
   }
 
   useEffect(() => {
@@ -61,15 +61,15 @@ export default function StrudelDemo() {
       hasRun.current = true;
       initStrudelMirrorCanvas();
     }
-  }, []);
+  });
 
   return (
     <div>
       <h2>Strudel Demo</h2>
       <main>
         <div className="container-fluid">
-          <MusicControls globalEditorRef={globalEditorRef} strudelCodeRef={strudelCodeRef} />
-          <TextPreprocessor globalEditorRef={globalEditorRef}  strudelCodeRef={strudelCodeRef}/>
+          <MusicControls globalEditorRef={globalEditorRef} strudelCode={strudelCode} setStruedelCode={setStrudelCode} />
+          <TextPreprocessor globalEditorRef={globalEditorRef}  strudelCode={strudelCode} setStrudelCode={setStrudelCode}/>
           <div className="row">
             <div
               className="col-md-8"

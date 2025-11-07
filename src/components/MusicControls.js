@@ -1,9 +1,9 @@
 import { processStudelCode } from "../utils/preprocessors";
 import SongSelector from "./SongSelector";
 
-export default function MusicControls({ globalEditorRef, strudelCodeRef }) {
+export default function MusicControls({ globalEditorRef, strudelCode, setStruedelCode }) {
   function procPlay() {
-    processStudelCode(globalEditorRef, strudelCodeRef);
+    processStudelCode(globalEditorRef, strudelCode);
     globalEditorRef.current.evaluate();
   }
 
@@ -11,7 +11,7 @@ export default function MusicControls({ globalEditorRef, strudelCodeRef }) {
     <div className="row">
       <div className="col-md-4">
         <nav>
-          <SongSelector globalEditorRef={globalEditorRef} strudelCodeRef={strudelCodeRef}/>
+          <SongSelector globalEditorRef={globalEditorRef} strudelCode={strudelCode} setStrudelCode={setStruedelCode}/>
           <button
             className="btn btn-outline-primary"
             onClick={procPlay}
