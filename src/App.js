@@ -60,8 +60,10 @@ export default function StrudelDemo() {
     if (!hasRun.current) {
       hasRun.current = true;
       initStrudelMirrorCanvas();
+
+      globalEditorRef.current.setCode(strudelCode);
     }
-  });
+  }, [strudelCode]);
 
   return (
     <div>

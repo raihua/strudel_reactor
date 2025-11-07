@@ -2,7 +2,7 @@ import { stranger_tune } from "./../tunes";
 import { ProcessStudelCode } from "../utils/preprocessors"; 
 import { useEffect, useState } from "react";
 
-export default function TextPreprocessor({ globalEditorRef, strudelCode }) {
+export default function TextPreprocessor({ globalEditorRef, strudelCode, setStrudelCode }) {
 
   return (
     <div className="row">
@@ -17,6 +17,7 @@ export default function TextPreprocessor({ globalEditorRef, strudelCode }) {
           className="form-control"
           rows="15"
           value={strudelCode}
+          onChange={(e) => setStrudelCode(e.target.value)}
         >
         </textarea>
       </div>

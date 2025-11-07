@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { stranger_tune } from "../tunes";
+import { stranger_tune} from "../tunes";
 
 export default function SongSelector({
   globalEditorRef,
@@ -7,7 +7,7 @@ export default function SongSelector({
   setStrudelCode,
 }) {
   const songsList = useRef(new Map([["stranger_tune", stranger_tune]]));
-  const [selectedSong, setSelectedSong] = useState("stranger_tune");
+  const [selectedSong, setSelectedSong] = useState("");
   const [addSongMode, setAddSongMode] = useState(false);
   const newSongCode = useRef("");
   const newSongName = useRef("");
@@ -34,6 +34,7 @@ export default function SongSelector({
             className="form-select"
             onChange={(e) => setSelectedSong(e.target.value)}
           >
+            <option value=""></option>
             {songsList ? (
               songsList.current
                 .entries()
@@ -47,7 +48,7 @@ export default function SongSelector({
         </div>
         <div className="row">
           <button
-            className="btn btn-outline-primary mb-3"
+            className="btn btn-outline-primary"
             onClick={() => setAddSongMode(!addSongMode)}
           >
             {addSongMode ? "Close and load add song mod" : "Open add song mode"}
@@ -68,7 +69,7 @@ export default function SongSelector({
                 onChange={(e) => (newSongCode.current = e.target.value)}
               ></textarea>
               <button
-                className="btn btn-outline-success mt-3"
+                className="btn btn-outline-success"
                 onClick={() => saveNewSong()}
               >
                 Save
