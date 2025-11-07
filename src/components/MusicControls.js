@@ -7,8 +7,8 @@ export default function MusicControls({ globalEditorRef, strudelCode, setStruede
   }
 
  return (
-    <div className="row-12 m-2 p-1 border border-dark">
-      <div className="col-md-4 mb-3">
+    <div className="row m-2 p-1 border border-dark bg-white">
+      <div className="col">
         <SongSelector globalEditorRef={globalEditorRef} strudelCode={strudelCode} setStrudelCode={setStruedelCode}/>
         <nav className="mt-3 border border-dark p-3 rounded d-flex justify-content-evenly">
           <button

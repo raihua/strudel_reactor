@@ -67,14 +67,26 @@ export default function StrudelDemo() {
 
   return (
     <div>
-      <h2 className="text-center mt-3 mb-3">Strudel Demo</h2>
       <main>
+        <h1 className="text-center mt-3 mb-3 text-white">Strudel Demo</h1>
         <div className="container-fluid">
-          <MusicControls globalEditorRef={globalEditorRef} strudelCode={strudelCode} setStruedelCode={setStrudelCode} />
+          <div className="d-flex flex-row row">
+            <div className="col-6">
+              <MusicControls
+                globalEditorRef={globalEditorRef}
+                strudelCode={strudelCode}
+                setStruedelCode={setStrudelCode} />
+            </div>
+            <div className="col-6">
+        <div className="row border rounded border-light border-4 m-2">
+          <canvas id="roll" className="d-inline bg-black"></canvas>
+        </div>
+            </div>
+          </div>
           <div className="row-12 d-flex flex-row">
             <TextPreprocessor globalEditorRef={globalEditorRef}  strudelCode={strudelCode} setStrudelCode={setStrudelCode}/>
             <div
-              className="border border-dark rounded col-6 mt-2 p-2"
+              className="border border-dark rounded col-6 mt-2 p-2 bg-white"
               style={{ maxHeight: "50vh", overflowY: "auto" }}
             >
               <div id="editor" />
@@ -82,7 +94,6 @@ export default function StrudelDemo() {
             </div>
           </div>
         </div>
-        <canvas id="roll"></canvas>
       </main>
     </div>
   );
