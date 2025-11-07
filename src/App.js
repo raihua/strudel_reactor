@@ -67,14 +67,14 @@ export default function StrudelDemo() {
 
   return (
     <div>
-      <h2>Strudel Demo</h2>
+      <h2 className="text-center mt-3 mb-3">Strudel Demo</h2>
       <main>
         <div className="container-fluid">
           <MusicControls globalEditorRef={globalEditorRef} strudelCode={strudelCode} setStruedelCode={setStrudelCode} />
-          <TextPreprocessor globalEditorRef={globalEditorRef}  strudelCode={strudelCode} setStrudelCode={setStrudelCode}/>
-          <div className="row">
+          <div className="row-12 d-flex flex-row">
+            <TextPreprocessor globalEditorRef={globalEditorRef}  strudelCode={strudelCode} setStrudelCode={setStrudelCode}/>
             <div
-              className="col-md-8"
+              className="border border-dark rounded col-6 mt-2 p-2"
               style={{ maxHeight: "50vh", overflowY: "auto" }}
             >
               <div id="editor" />

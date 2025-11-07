@@ -5,9 +5,7 @@ import { useEffect, useState } from "react";
 export default function TextPreprocessor({ globalEditorRef, strudelCode, setStrudelCode }) {
 
   return (
-    <div className="row">
-      <div
-        className="col-md-8"
+    <div className="col-6 border border-dark rounded p-2 m-2"
         style={{ maxHeight: "50vh", overflowY: "auto" }}
       >
         <label htmlFor="exampleFormControlTextarea1" className="form-label">
@@ -21,6 +19,5 @@ export default function TextPreprocessor({ globalEditorRef, strudelCode, setStru
         >
         </textarea>
       </div>
-    </div>
   );
 }
