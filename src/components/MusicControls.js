@@ -1,4 +1,3 @@
-
 export default function MusicControls({
   globalEditorRef,
   strudelCode,
@@ -16,15 +15,17 @@ export default function MusicControls({
   return (
     <div className="shadow p-3 mb-5 bg-white rounded">
       <h5>Music Controls</h5>
-      <button className="btn btn-outline-primary" onClick={playMusic}>
-        Play
-      </button>
-      <button
-        className="btn btn-outline-primary"
-        onClick={() => globalEditorRef.current.stop()}
-      >
-        Stop
-      </button>
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button className="btn btn-success" onClick={playMusic}>
+          Play
+        </button>
+        <button
+          className="btn btn-outline-danger"
+          onClick={() => globalEditorRef.current.stop()}
+        >
+          Stop
+        </button>
+      </div>
     </div>
   );
 }

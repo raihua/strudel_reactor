@@ -64,25 +64,29 @@ export default function StrudelDemo() {
   }, []);
 
   return (
-    <div>
-      <main>
-        <h1>Strudel Demo</h1>
-        <SongSelector
-          globalEditorRef={globalEditorRef}
-          strudelCode={strudelCode}
-          setStrudelCode={setStrudelCode}
-        />
-        <MusicControls
-          globalEditorRef={globalEditorRef}
-          strudelCode={strudelCode}
-          setStruedelCode={setStrudelCode}
-        />
-        <StrudelEditor
-          globalEditorRef={globalEditorRef}
-          strudelCode={strudelCode}
-          setStrudelCode={setStrudelCode}
-        />
-      </main>
-    </div>
+    <main>
+      <h1 className="text-center">Strudel Demo</h1>
+      <div className="row">
+        <div className="col-6">
+          <StrudelEditor
+            globalEditorRef={globalEditorRef}
+            strudelCode={strudelCode}
+            setStrudelCode={setStrudelCode}
+          />
+        </div>
+        <div className="col-6">
+          <SongSelector
+            globalEditorRef={globalEditorRef}
+            strudelCode={strudelCode}
+            setStrudelCode={setStrudelCode}
+          />
+          <MusicControls
+            globalEditorRef={globalEditorRef}
+            strudelCode={strudelCode}
+            setStruedelCode={setStrudelCode}
+          />
+        </div>
+      </div>
+    </main>
   );
 }

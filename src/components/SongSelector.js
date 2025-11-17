@@ -63,12 +63,15 @@ export default function SongSelector({
           <></>
         )}
       </select>
-      <button
-        className="btn btn-outline-primary"
-        onClick={() => setAddSongMode(true)}
-      >
-        Add Song
-      </button>
+      <div className="d-flex flex-wrap gap-2 mt-3">
+        <button
+          className="btn btn-primary"
+          onClick={() => setAddSongMode(true)}
+        >
+          Add Song
+        </button>
+      </div>
+
       {addSongMode &&
         createPortal(
           <div className="popup-modal">
@@ -83,18 +86,20 @@ export default function SongSelector({
               className="form-control"
               onChange={(e) => (newSongCode.current = e.target.value)}
             ></textarea>
-            <button
-              className="btn btn-outline-success"
-              onClick={() => saveNewSong()}
-            >
-              Save
-            </button>
-            <button
-              className="btn btn-outline-primary"
-              onClick={() => setAddSongMode(false)}
-            >
-              Close
-            </button>
+            <div className="d-flex flex-wrap gap-2 mt-3">
+              <button
+                className="btn btn-success"
+                onClick={() => saveNewSong()}
+              >
+                Save
+              </button>
+              <button
+                className="btn btn-outline-danger"
+                onClick={() => setAddSongMode(false)}
+              >
+                Close
+              </button>
+            </div>
           </div>,
           document.body
         )}
