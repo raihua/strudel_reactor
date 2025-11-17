@@ -8,7 +8,7 @@ export default function SongSelector({
   setStrudelCode,
 }) {
   const songsList = useRef(new Map([["stranger_tune", stranger_tune]]));
-  const [selectedSong, setSelectedSong] = useState("");
+  const [selectedSong, setSelectedSong] = useState(localStorage.getItem("SelectedSong"));
   const [addSongMode, setAddSongMode] = useState(false);
   const newSongCode = useRef("");
   const newSongName = useRef("");
@@ -17,6 +17,7 @@ export default function SongSelector({
     let songCode = songsList.current?.get(selectedSong);
     setStrudelCode(songCode);
     globalEditorRef.current?.setCode(songCode);
+    localStorage.setItem("SelectedSong", selectedSong)
   }, [selectedSong]);
 
   useEffect(() => {
@@ -51,6 +52,7 @@ export default function SongSelector({
       <select
         className="form-select"
         onChange={(e) => setSelectedSong(e.target.value)}
+        value={selectedSong}
       >
         <option value="">None</option>
         {songsList ? (
