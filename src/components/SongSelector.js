@@ -18,8 +18,17 @@ export default function SongSelector({
     globalEditorRef.current?.setCode(songCode);
   }, [selectedSong]);
 
+  useEffect(() => {
+  const stored = localStorage.getItem("SongsList");
+  if (stored) {
+    songsList.current = new Map(JSON.parse(stored));
+  }
+}, []);
+
   function saveNewSong() {
-    songsList.current.set(newSongName.current, newSongCode.current);
+    songsList.current.set(newSongName.current, newSongCode.current); 
+    const serialised = JSON.stringify(Array.from(songsList.current.entries()));
+    localStorage.setItem("SongsList", serialised);
     console.log("saved " + newSongName.current);
   }
 
