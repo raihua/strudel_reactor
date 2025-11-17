@@ -1,6 +1,3 @@
-import { flash } from "@strudel/codemirror";
-import { stranger_tune } from "../tunes";
-import { ProcessStudelCode } from "../utils/preprocessors";
 import { useEffect, useState } from "react";
 
 export default function StrudelEditor({
