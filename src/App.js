@@ -65,7 +65,7 @@ export default function StrudelDemo() {
 
   return (
     <main>
-      <h1 className="text-center">Strudel Demo</h1>
+      <h1 className="text-center p-3 mb-4 shadow" style={{"background-color": "#e3f2fd"}}>Strudel Demo</h1>
       <div className="row">
         <div className="col-6">
           <StrudelEditor
