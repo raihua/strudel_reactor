@@ -40,12 +40,8 @@ export default function SongSelector({
   }
 
   return (
-    <div className="row border border-dark p-3 rounded m-2">
-      <div className="col">
-        <div className="row">
+    <>
           <p>Selected song: {selectedSong}</p>
-        </div>
-        <div className="row mb-3">
           <select
             className="form-select"
             onChange={(e) => setSelectedSong(e.target.value)}
@@ -61,18 +57,14 @@ export default function SongSelector({
               <></>
             )}
           </select>
-        </div>
-        <div className="row">
           <button
             className="btn btn-outline-primary"
             onClick={() => setAddSongMode(!addSongMode)}
           >
-            {addSongMode ? "Close and load add song mod" : "Open add song mode"}
+            {addSongMode ? "Close" : "Add Songs"}
           </button>
-        </div>
         {addSongMode ? (
-          <div className="row">
-            <div className="col">
+          <>
               <label>New song name:</label>
               <input
                 type="text"
@@ -85,17 +77,15 @@ export default function SongSelector({
                 onChange={(e) => (newSongCode.current = e.target.value)}
               ></textarea>
               <button
-                className="btn btn-outline-success"
+                className="btn btn-outline-success mt-3"
                 onClick={() => saveNewSong()}
               >
                 Save
               </button>
-            </div>
-          </div>
+              </>
         ) : (
           ""
         )}
-      </div>
-    </div>
+    </>
   );
 }

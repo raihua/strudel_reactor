@@ -7,10 +7,8 @@ export default function MusicControls({ globalEditorRef, strudelCode, setStruede
   }
 
  return (
-    <div className="row m-2 p-1 border border-dark bg-white">
-      <div className="col">
+    <>
         <SongSelector globalEditorRef={globalEditorRef} strudelCode={strudelCode} setStrudelCode={setStruedelCode}/>
-        <nav className="mt-3 border border-dark p-3 rounded d-flex justify-content-evenly">
           <button
             className="btn btn-outline-primary"
             onClick={procPlay}
@@ -29,8 +27,6 @@ export default function MusicControls({ globalEditorRef, strudelCode, setStruede
           >
             Stop
           </button>
-        </nav>
-      </div>
-    </div>
+    </>
   );
 }
