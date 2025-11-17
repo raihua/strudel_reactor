@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { stranger_tune} from "../tunes";
+import { createPortal } from "react-dom";
+import { stranger_tune } from "../tunes";
 
 export default function SongSelector({
   globalEditorRef,
@@ -19,72 +20,83 @@ export default function SongSelector({
   }, [selectedSong]);
 
   useEffect(() => {
-  const stored = localStorage.getItem("SongsList");
-  if (stored) {
-    songsList.current = new Map(JSON.parse(stored));
-  }
-}, []);
+    const stored = localStorage.getItem("SongsList");
+    if (stored) {
+      songsList.current = new Map(JSON.parse(stored));
+    }
+  }, []);
 
   function saveNewSong() {
     const name = newSongName.current;
     const code = newSongCode.current;
 
-    if (!name || !code) return;
+    if (!name || !code) {
+      alert("Failed to save. Song name or Strudel song code was empty.");
+    } else {
+      songsList.current.set(name, code);
 
-    songsList.current.set(name, code); 
+      const serialised = JSON.stringify(
+        Array.from(songsList.current.entries())
+      );
 
-    const serialised = JSON.stringify(Array.from(songsList.current.entries()));
-
-    localStorage.setItem("SongsList", serialised);
-    console.log("saved " + newSongName.current);
+      localStorage.setItem("SongsList", serialised);
+      alert(`Song ${name} has been saved successfully`);
+      setAddSongMode(false);
+    }
   }
 
   return (
     <>
-          <p>Selected song: {selectedSong}</p>
-          <select
-            className="form-select"
-            onChange={(e) => setSelectedSong(e.target.value)}
-          >
-            <option value="">None</option>
-            {songsList ? (
-              songsList.current
-                .entries()
-                .map(([songName, songCode]) => (
-                  <option value={[songName]}>{songName}</option>
-                ))
-            ) : (
-              <></>
-            )}
-          </select>
-          <button
-            className="btn btn-outline-primary"
-            onClick={() => setAddSongMode(!addSongMode)}
-          >
-            {addSongMode ? "Close" : "Add Songs"}
-          </button>
-        {addSongMode ? (
-          <>
-              <label>New song name:</label>
-              <input
-                type="text"
-                className="form-control"
-                onChange={(e) => (newSongName.current = e.target.value)}
-              ></input>
-              <label>Strudel song code:</label>
-              <textarea
-                className="form-control"
-                onChange={(e) => (newSongCode.current = e.target.value)}
-              ></textarea>
-              <button
-                className="btn btn-outline-success mt-3"
-                onClick={() => saveNewSong()}
-              >
-                Save
-              </button>
-              </>
+      <p>Selected song: {selectedSong}</p>
+      <select
+        className="form-select"
+        onChange={(e) => setSelectedSong(e.target.value)}
+      >
+        <option value="">None</option>
+        {songsList ? (
+          songsList.current.entries().map(([songName, songCode]) => (
+            <option key={songName} value={songName}>
+              {songName}
+            </option>
+          ))
         ) : (
-          ""
+          <></>
+        )}
+      </select>
+      <button
+        className="btn btn-outline-primary"
+        onClick={() => setAddSongMode(true)}
+      >
+        Add Song
+      </button>
+      {addSongMode &&
+        createPortal(
+          <div className="song-modal">
+            <label>New song name:</label>
+            <input
+              type="text"
+              className="form-control"
+              onChange={(e) => (newSongName.current = e.target.value)}
+            ></input>
+            <label>Strudel song code:</label>
+            <textarea
+              className="form-control"
+              onChange={(e) => (newSongCode.current = e.target.value)}
+            ></textarea>
+            <button
+              className="btn btn-outline-success"
+              onClick={() => saveNewSong()}
+            >
+              Save
+            </button>
+            <button
+              className="btn btn-outline-primary"
+              onClick={() => setAddSongMode(false)}
+            >
+              Close
+            </button>
+          </div>,
+          document.body
         )}
     </>
   );

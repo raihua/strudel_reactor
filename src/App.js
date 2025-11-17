@@ -59,10 +59,8 @@ export default function StrudelDemo() {
     if (!hasRun.current) {
       hasRun.current = true;
       initStrudelMirrorCanvas();
-
-      globalEditorRef.current.setCode(strudelCode);
     }
-  }, [strudelCode]);
+  }, []);
 
   return (
     <div>
@@ -73,14 +71,12 @@ export default function StrudelDemo() {
           strudelCode={strudelCode}
           setStruedelCode={setStrudelCode}
         />
-        <canvas id="roll"></canvas>
         <StrudelEditor
           globalEditorRef={globalEditorRef}
           strudelCode={strudelCode}
           setStrudelCode={setStrudelCode}
         />
-        <div id="editor" />
-        <div id="output" />
+        <canvas id="roll"></canvas>
       </main>
     </div>
   );
