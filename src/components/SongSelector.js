@@ -71,7 +71,7 @@ export default function SongSelector({
       </button>
       {addSongMode &&
         createPortal(
-          <div className="song-modal">
+          <div className="popup-modal">
             <label>New song name:</label>
             <input
               type="text"
