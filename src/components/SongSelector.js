@@ -26,8 +26,15 @@ export default function SongSelector({
 }, []);
 
   function saveNewSong() {
-    songsList.current.set(newSongName.current, newSongCode.current); 
+    const name = newSongName.current;
+    const code = newSongCode.current;
+
+    if (!name || !code) return;
+
+    songsList.current.set(name, code); 
+
     const serialised = JSON.stringify(Array.from(songsList.current.entries()));
+
     localStorage.setItem("SongsList", serialised);
     console.log("saved " + newSongName.current);
   }
