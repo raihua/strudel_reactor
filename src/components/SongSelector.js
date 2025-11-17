@@ -46,8 +46,8 @@ export default function SongSelector({
   }
 
   return (
-    <>
-      <p>Selected song: {selectedSong}</p>
+    <div className="shadow p-3 mb-5 bg-white rounded">
+      <h5>Selected song: {selectedSong}</h5>
       <select
         className="form-select"
         onChange={(e) => setSelectedSong(e.target.value)}
@@ -98,6 +98,6 @@ export default function SongSelector({
           </div>,
           document.body
         )}
-    </>
+    </div>
   );
 }

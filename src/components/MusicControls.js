@@ -14,7 +14,8 @@ export default function MusicControls({
   }
 
   return (
-    <>
+    <div className="shadow p-3 mb-5 bg-white rounded">
+      <h5>Music Controls</h5>
       <button className="btn btn-outline-primary" onClick={playMusic}>
         Play
       </button>
@@ -24,6 +25,6 @@ export default function MusicControls({
       >
         Stop
       </button>
-    </>
+    </div>
   );
 }
