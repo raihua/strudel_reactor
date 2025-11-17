@@ -11,13 +11,12 @@ import {
   registerSynthSounds,
 } from "@strudel/webaudio";
 import { registerSoundfonts } from "@strudel/soundfonts";
-import { stranger_tune } from "./tunes";
-import TextPreprocessor from "./components/TextPreprocessor";
+import StrudelEditor from "./components/StrudelEditor";
 import MusicControls from "./components/MusicControls";
 
 export default function StrudelDemo() {
   const globalEditorRef = useRef(null);
-  const [strudelCode, setStrudelCode] = useState(stranger_tune);
+  const [strudelCode, setStrudelCode] = useState();
   const hasRun = useRef(false);
 
   function initStrudelMirrorCanvas() {
@@ -75,7 +74,7 @@ export default function StrudelDemo() {
           setStruedelCode={setStrudelCode}
         />
         <canvas id="roll"></canvas>
-        <TextPreprocessor
+        <StrudelEditor
           globalEditorRef={globalEditorRef}
           strudelCode={strudelCode}
           setStrudelCode={setStrudelCode}
