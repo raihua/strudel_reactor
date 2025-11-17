@@ -18,6 +18,8 @@ export default function StrudelEditor({
         value={strudelCode}
         onChange={(e) => setStrudelCode(e.target.value)}
       ></textarea>
+      <div id="editor" />
+      <div id="output" />
     </div>
   );
 }
