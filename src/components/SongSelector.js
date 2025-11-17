@@ -46,7 +46,7 @@ export default function SongSelector({
             className="form-select"
             onChange={(e) => setSelectedSong(e.target.value)}
           >
-            <option value=""></option>
+            <option value="">None</option>
             {songsList ? (
               songsList.current
                 .entries()
