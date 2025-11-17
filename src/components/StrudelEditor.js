@@ -22,6 +22,7 @@ export default function StrudelEditor({
       <button  className="btn btn-outline-primary" onClick={() => setShowOutput(false)}>Close Output</button>
       <div id="editor" hidden={!showOutput} />
       <div id="output" hidden={!showOutput} />
+      <canvas id="roll"></canvas>
     </div>
   );
 }
