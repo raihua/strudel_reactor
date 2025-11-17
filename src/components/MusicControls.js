@@ -1,4 +1,3 @@
-import SongSelector from "./SongSelector";
 
 export default function MusicControls({
   globalEditorRef,
@@ -16,11 +15,6 @@ export default function MusicControls({
 
   return (
     <>
-      <SongSelector
-        globalEditorRef={globalEditorRef}
-        strudelCode={strudelCode}
-        setStrudelCode={setStruedelCode}
-      />
       <button className="btn btn-outline-primary" onClick={playMusic}>
         Play
       </button>

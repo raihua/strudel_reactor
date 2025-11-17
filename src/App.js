@@ -13,6 +13,7 @@ import {
 import { registerSoundfonts } from "@strudel/soundfonts";
 import StrudelEditor from "./components/StrudelEditor";
 import MusicControls from "./components/MusicControls";
+import SongSelector from "./components/SongSelector";
 
 export default function StrudelDemo() {
   const globalEditorRef = useRef(null);
@@ -66,6 +67,11 @@ export default function StrudelDemo() {
     <div>
       <main>
         <h1>Strudel Demo</h1>
+        <SongSelector
+          globalEditorRef={globalEditorRef}
+          strudelCode={strudelCode}
+          setStrudelCode={setStrudelCode}
+        />
         <MusicControls
           globalEditorRef={globalEditorRef}
           strudelCode={strudelCode}
