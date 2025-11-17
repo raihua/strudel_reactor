@@ -62,7 +62,7 @@ export default function SongSelector({
             </option>
           ))
         ) : (
-          <></>
+          ""
         )}
       </select>
       <div className="d-flex flex-wrap gap-2 mt-3">

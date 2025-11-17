@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 .popup-modal {
   background: white;
   border: 1px solid black;
@@ -11,4 +13,8 @@
 
 main {
   background-color: #f5f5f9;
+}
+
+body {
+  font-family: 'Roboto', 'Inter', 'Helvetica Neue', sans-serif;
 }
