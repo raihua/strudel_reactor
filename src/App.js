@@ -82,7 +82,6 @@ export default function StrudelDemo() {
           strudelCode={strudelCode}
           setStrudelCode={setStrudelCode}
         />
-        <canvas id="roll"></canvas>
       </main>
     </div>
   );
