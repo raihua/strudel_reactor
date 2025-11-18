@@ -1,8 +1,18 @@
+import { useState } from "react";
+import { changeGain } from "../utils/preprocessors";
+
 export default function MusicControls({
   globalEditorRef,
   strudelCode,
   setStrudelCode,
 }) {
+  const [gain, setGain] = useState(1);
+
+  function updateGain(amount) {
+    setGain(amount);
+    changeGain(amount, globalEditorRef, strudelCode, setStrudelCode);
+  }
+
   function playMusic() {
     if (!strudelCode) {
       alert("No strudel code set.");
@@ -25,6 +35,21 @@ export default function MusicControls({
         >
           Stop
         </button>
+      </div>
+      <div>
+        <label class="form-label">
+          Gain: 
+        </label>
+        <input
+          type="range"
+          className="form-range"
+          min="0"
+          max="3"
+          value={gain}
+          onChange={(e) =>
+            updateGain(e.target.value)
+          }
+        ></input>
       </div>
     </div>
   );

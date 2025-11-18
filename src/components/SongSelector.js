@@ -8,7 +8,9 @@ export default function SongSelector({
   setStrudelCode,
 }) {
   const songsList = useRef(new Map([["stranger_tune", stranger_tune]]));
-  const [selectedSong, setSelectedSong] = useState(localStorage.getItem("SelectedSong"));
+  const [selectedSong, setSelectedSong] = useState(
+    localStorage.getItem("SelectedSong")
+  );
   const [addSongMode, setAddSongMode] = useState(false);
   const newSongCode = useRef("");
   const newSongName = useRef("");
@@ -17,7 +19,7 @@ export default function SongSelector({
     let songCode = songsList.current?.get(selectedSong);
     setStrudelCode(songCode);
     globalEditorRef.current?.setCode(songCode);
-    localStorage.setItem("SelectedSong", selectedSong)
+    localStorage.setItem("SelectedSong", selectedSong);
   }, [selectedSong]);
 
   useEffect(() => {
@@ -48,22 +50,23 @@ export default function SongSelector({
 
   return (
     <div className="shadow p-3 mb-5 bg-white rounded">
-      <h5>Selected song: {selectedSong}</h5>
+      <div className="d-flex flex-row align-items-baseline">
+        <h5 className="me-2">Selected song:</h5>
+        <p>{selectedSong}</p>
+      </div>
       <select
         className="form-select"
         onChange={(e) => setSelectedSong(e.target.value)}
         value={selectedSong}
       >
         <option value="">None</option>
-        {songsList ? (
-          songsList.current.entries().map(([songName, songCode]) => (
-            <option key={songName} value={songName}>
-              {songName}
-            </option>
-          ))
-        ) : (
-          ""
-        )}
+        {songsList
+          ? songsList.current.entries().map(([songName, songCode]) => (
+              <option key={songName} value={songName}>
+                {songName}
+              </option>
+            ))
+          : ""}
       </select>
       <div className="d-flex flex-wrap gap-2 mt-3">
         <button
@@ -89,10 +92,7 @@ export default function SongSelector({
               onChange={(e) => (newSongCode.current = e.target.value)}
             ></textarea>
             <div className="d-flex flex-wrap gap-2 mt-3">
-              <button
-                className="btn btn-success"
-                onClick={() => saveNewSong()}
-              >
+              <button className="btn btn-success" onClick={() => saveNewSong()}>
                 Save
               </button>
               <button
