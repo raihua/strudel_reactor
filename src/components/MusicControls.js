@@ -1,7 +1,7 @@
 export default function MusicControls({
   globalEditorRef,
   strudelCode,
-  setStruedelCode,
+  setStrudelCode,
 }) {
   function playMusic() {
     if (!strudelCode) {

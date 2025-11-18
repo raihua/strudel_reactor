@@ -83,7 +83,7 @@ export default function StrudelDemo() {
           <MusicControls
             globalEditorRef={globalEditorRef}
             strudelCode={strudelCode}
-            setStruedelCode={setStrudelCode}
+            setStrudelCode={setStrudelCode}
           />
         </div>
       </div>
