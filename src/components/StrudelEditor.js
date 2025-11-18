@@ -5,7 +5,7 @@ export default function StrudelEditor({
   strudelCode,
   setStrudelCode,
 }) {
-  const [showOutput, setShowOutput] = useState(true);
+  const [showOutput, setShowOutput] = useState(false);
 
   function processPlay() {
     if (!strudelCode) {
