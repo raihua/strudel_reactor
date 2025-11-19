@@ -31,7 +31,7 @@ export default function MusicControls({
   return (
     <div className="shadow p-3 mb-5 bg-white rounded">
       <h5>Music Controls</h5>
-      <div class="btn-group" role="group" aria-label="Basic example">
+      <div className="btn-group" role="group" aria-label="Basic example">
         <button className="btn btn-success" onClick={playMusic}>
           Play
         </button>
@@ -43,7 +43,7 @@ export default function MusicControls({
         </button>
       </div>
       <div>
-        <label class="form-label">
+        <label className="form-label">
           Gain: 
         </label>
         <input
@@ -58,7 +58,7 @@ export default function MusicControls({
         ></input>
       </div>
       <div>
-          <input class="form-check-input mt-0" type="checkbox" value={mute} onClick={() => updateMute(!mute)}/>
+          <input className="form-check-input mt-0" type="checkbox" value={mute} onClick={() => updateMute(!mute)}/>
       </div>
     </div>
   );

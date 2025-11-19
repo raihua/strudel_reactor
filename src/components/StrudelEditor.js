@@ -20,7 +20,7 @@ export default function StrudelEditor({
     <div className="shadow p-3 mb-5 bg-white rounded">
       <h5>Strudel Code Editor:</h5>
       <div className="d-flex flex-wrap gap-2 mb-3">
-        <div class="btn-group" role="group" aria-label="Basic example">
+        <div className="btn-group" role="group" aria-label="Basic example">
           <button
             className="btn btn-primary"
             onClick={() => setShowOutput(true)}
