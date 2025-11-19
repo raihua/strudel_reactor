@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { changeGain } from "../utils/preprocessors";
+import { useEffect, useState } from "react";
+import { changeGain, toggleMute } from "../utils/preprocessors";
 
 export default function MusicControls({
   globalEditorRef,
@@ -7,6 +7,12 @@ export default function MusicControls({
   setStrudelCode,
 }) {
   const [gain, setGain] = useState(1);
+  const [mute, setMute] = useState(false);
+
+  function updateMute(value) {
+    setMute(value)
+    toggleMute(value, globalEditorRef, strudelCode, setStrudelCode)
+  }
 
   function updateGain(amount) {
     setGain(amount);
@@ -50,6 +56,9 @@ export default function MusicControls({
             updateGain(e.target.value)
           }
         ></input>
+      </div>
+      <div>
+          <input class="form-check-input mt-0" type="checkbox" value={mute} onClick={() => updateMute(!mute)}/>
       </div>
     </div>
   );
