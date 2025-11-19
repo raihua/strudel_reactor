@@ -60,6 +60,25 @@ export default function MusicControls({}) {
           onClick={() => updateMute(!mute)}
         />
       </div>
+      <div>
+        <button className="btn btn-primary">Save</button>
+        <button className="btn btn-primary">Load</button>
+      </div>
+      <div>
+        <div className="form-check">
+          <input className="form-check-input" type="radio" />
+          <label className="form-check-label">Radio</label>
+        </div>
+        <div>
+          <div className="form-check form-switch">
+            <input className="form-check-input" type="checkbox" role="switch" />
+            <label className="form-check-label">
+              Default switch checkbox input
+            </label>
+          </div>
+        </div>
+        {/* TODO: accordion */}
+      </div>
     </div>
   );
 }
