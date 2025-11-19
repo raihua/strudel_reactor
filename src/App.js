@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { StrudelMirror } from "@strudel/codemirror";
 import { evalScope, set } from "@strudel/core";
 import { drawPianoroll } from "@strudel/draw";
@@ -18,6 +18,7 @@ import SongSelector from "./components/SongSelector";
 export default function StrudelDemo() {
   const globalEditorRef = useRef(null);
   const [strudelCode, setStrudelCode] = useState();
+  const previousStrudelCode = usePreviousStrudelCode(strudelCode);
   const hasRun = useRef(false);
 
   function initStrudelMirrorCanvas() {
@@ -54,6 +55,23 @@ export default function StrudelDemo() {
     });
 
     globalEditorRef.current.setCode(strudelCode);
+  }
+
+  function usePreviousStrudelCode(value) {
+    const strudelPreviousRef = useRef();
+
+    useEffect(() => {
+      if (!value) {
+        return;
+      }
+
+      const serialised = JSON.stringify(strudelCode);
+      localStorage.setItem("PreviousSong", serialised);
+
+      strudelPreviousRef.current = value;
+    }, [value]);
+
+    return strudelPreviousRef.current;
   }
 
   useEffect(() => {
