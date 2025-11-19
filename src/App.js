@@ -1,5 +1,12 @@
 import "./App.css";
-import { use, useEffect, useRef, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useContext,
+  createContext,
+} from "react";
 import { StrudelMirror } from "@strudel/codemirror";
 import { evalScope, set } from "@strudel/core";
 import { drawPianoroll } from "@strudel/draw";
@@ -15,11 +22,22 @@ import StrudelEditor from "./components/StrudelEditor";
 import MusicControls from "./components/MusicControls";
 import SongSelector from "./components/SongSelector";
 
+export const AppContext = createContext(null);
+
 export default function StrudelDemo() {
   const globalEditorRef = useRef(null);
   const [strudelCode, setStrudelCode] = useState();
   const previousStrudelCode = usePreviousStrudelCode(strudelCode);
   const hasRun = useRef(false);
+
+  const appState = useMemo(
+    () => ({
+      globalEditorRef,
+      strudelCode,
+      setStrudelCode,
+    }),
+    [strudelCode]
+  );
 
   function initStrudelMirrorCanvas() {
     //Code copied from example: https://codeberg.org/uzu/strudel/src/branch/main/examples/codemirror-repl
@@ -53,8 +71,6 @@ export default function StrudelDemo() {
         ]);
       },
     });
-
-    globalEditorRef.current.setCode(strudelCode);
   }
 
   function usePreviousStrudelCode(value) {
@@ -82,29 +98,19 @@ export default function StrudelDemo() {
   }, []);
 
   return (
-    <main>
-      <h1 className="text-center p-3 mb-4 shadow">Strudel Demo</h1>
-      <div className="row">
-        <div className="col-6">
-          <StrudelEditor
-            globalEditorRef={globalEditorRef}
-            strudelCode={strudelCode}
-            setStrudelCode={setStrudelCode}
-          />
+    <AppContext.Provider value={appState}>
+      <main>
+        <h1 className="text-center p-3 mb-4 shadow">Strudel Demo</h1>
+        <div className="row">
+          <div className="col-6">
+            <StrudelEditor />
+          </div>
+          <div className="col-6">
+            <SongSelector />
+            <MusicControls />
+          </div>
         </div>
-        <div className="col-6">
-          <SongSelector
-            globalEditorRef={globalEditorRef}
-            strudelCode={strudelCode}
-            setStrudelCode={setStrudelCode}
-          />
-          <MusicControls
-            globalEditorRef={globalEditorRef}
-            strudelCode={strudelCode}
-            setStrudelCode={setStrudelCode}
-          />
-        </div>
-      </div>
-    </main>
+      </main>
+    </AppContext.Provider>
   );
 }

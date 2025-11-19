@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../App";
 
 export default function StrudelEditor({
-  globalEditorRef,
-  strudelCode,
-  setStrudelCode,
 }) {
   const [showOutput, setShowOutput] = useState(false);
+  const {globalEditorRef, strudelCode, setStrudelCode} = useContext(AppContext);
 
   function processPlay() {
     if (!strudelCode) {

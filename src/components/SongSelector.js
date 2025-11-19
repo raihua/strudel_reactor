@@ -1,12 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { createPortal } from "react-dom";
 import { stranger_tune } from "../tunes";
+import { AppContext } from "../App";
 
 export default function SongSelector({
-  globalEditorRef,
-  strudelCode,
-  setStrudelCode,
 }) {
+  const {globalEditorRef, strudelCode, setStrudelCode} = useContext(AppContext);
   const songsList = useRef(new Map([["stranger_tune", stranger_tune]]));
   const [selectedSong, setSelectedSong] = useState(
     localStorage.getItem("SelectedSong")
