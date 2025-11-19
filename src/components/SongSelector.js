@@ -61,7 +61,7 @@ export default function SongSelector({
       >
         <option value="">None</option>
         {songsList
-          ? songsList.current.entries().map(([songName, songCode]) => (
+          ? Array.from(songsList.current.entries()).map(([songName, songCode]) => (
               <option key={songName} value={songName}>
                 {songName}
               </option>
