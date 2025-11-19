@@ -3,9 +3,9 @@ import { createPortal } from "react-dom";
 import { stranger_tune } from "../tunes";
 import { AppContext } from "../App";
 
-export default function SongSelector({
-}) {
-  const {globalEditorRef, strudelCode, setStrudelCode} = useContext(AppContext);
+export default function SongSelector({}) {
+  const { globalEditorRef, strudelCode, setStrudelCode } =
+    useContext(AppContext);
   const songsList = useRef(new Map([["stranger_tune", stranger_tune]]));
   const [selectedSong, setSelectedSong] = useState(
     localStorage.getItem("SelectedSong")
@@ -60,11 +60,13 @@ export default function SongSelector({
       >
         <option value="">None</option>
         {songsList
-          ? Array.from(songsList.current.entries()).map(([songName, songCode]) => (
-              <option key={songName} value={songName}>
-                {songName}
-              </option>
-            ))
+          ? Array.from(songsList.current.entries()).map(
+              ([songName, songCode]) => (
+                <option key={songName} value={songName}>
+                  {songName}
+                </option>
+              )
+            )
           : ""}
       </select>
       <div className="d-flex flex-wrap gap-2 mt-3">
