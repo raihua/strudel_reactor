@@ -6,14 +6,17 @@ import { AppContext } from "../App";
 export default function SongSelector({}) {
   const { globalEditorRef, strudelCode, setStrudelCode } =
     useContext(AppContext);
-  const songsList = useRef(new Map([["stranger_tune", stranger_tune]]));
+
   const [selectedSong, setSelectedSong] = useState(
     localStorage.getItem("SelectedSong")
   );
-  const [addSongMode, setAddSongMode] = useState(false);
-  const newSongCode = useRef("");
-  const newSongName = useRef("");
+  const [showAddSongMode, setShowAddSongMode] = useState(false);
 
+  const songsList = useRef(new Map([["stranger_tune", stranger_tune]]));
+  const newSongName = useRef("");
+  const newSongCode = useRef("");
+
+  // Sets the editors song code to the selected song
   useEffect(() => {
     let songCode = songsList.current?.get(selectedSong);
     setStrudelCode(songCode);
@@ -21,6 +24,7 @@ export default function SongSelector({}) {
     localStorage.setItem("SelectedSong", selectedSong);
   }, [selectedSong]);
 
+  // Loads the song list from local storage
   useEffect(() => {
     const stored = localStorage.getItem("SongsList");
     if (stored) {
@@ -37,13 +41,13 @@ export default function SongSelector({}) {
     } else {
       songsList.current.set(name, code);
 
-      const serialised = JSON.stringify(
+      const songListJSON = JSON.stringify(
         Array.from(songsList.current.entries())
       );
 
-      localStorage.setItem("SongsList", serialised);
+      localStorage.setItem("SongsList", songListJSON);
       alert(`Song ${name} has been saved successfully`);
-      setAddSongMode(false);
+      setShowAddSongMode(false);
     }
   }
 
@@ -67,18 +71,18 @@ export default function SongSelector({}) {
                 </option>
               )
             )
-          : ""}
+          : null}
       </select>
       <div className="d-flex flex-wrap gap-2 mt-3">
         <button
           className="btn btn-primary"
-          onClick={() => setAddSongMode(true)}
+          onClick={() => setShowAddSongMode(true)}
         >
           Add Song
         </button>
       </div>
 
-      {addSongMode &&
+      {showAddSongMode &&
         createPortal(
           <div className="popup-modal">
             <label>New song name:</label>
@@ -98,7 +102,7 @@ export default function SongSelector({}) {
               </button>
               <button
                 className="btn btn-outline-danger"
-                onClick={() => setAddSongMode(false)}
+                onClick={() => setShowAddSongMode(false)}
               >
                 Close
               </button>
