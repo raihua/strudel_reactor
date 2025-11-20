@@ -1,3 +1,23 @@
+# Controls
+
+- **Strudel Editor**  
+  Allows you to edit the code and then run it via the **Process** and **Play** buttons. **Open Output** and **Close Output** show the editor's out-of-the-box features.
+
+- **Song Selector**  
+  Allows you to select preexisting songs. These are saved to your local storage.
+
+- **Music Controls**  
+  Have a global **Gain** and **PostGain** setter. **Mute** comments out the code. The settings can be saved and loaded via the **Save** and **Load** buttons.
+
+---
+
+# Quirks
+
+- Depending on some songs, **Gain** and **PostGain** value changes aren’t reflected unless you **Stop** and **Play** (rare scenarios).  
+- **Waveform** doesn't currently work.  
+- **PostGain checkbox** currently just mutes; it is still a work in progress.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -8,10 +8,14 @@ export default function MusicControls({}) {
   const [postGain, setPostGain] = useState(1);
   const [waveForm, setWaveForm] = useState("");
   const [mute, setMute] = useState(false);
+  const [showAccordion1, setShowAccordion1] = useState(true);
+  const [showAccordion2, setShowAccordion2] = useState(false);
+  const [showAccordion3, setShowAccordion3] = useState(false);
   const { globalEditorRef, strudelCode, setStrudelCode, previousStrudelCode } =
     useContext(AppContext);
 
   function saveJSONState() {
+    // Binding the state to on obj
     const state = {
       gain: gain,
       postGain: postGain,
@@ -19,9 +23,12 @@ export default function MusicControls({}) {
       mute: mute,
     };
 
+    // Create downloadble json
     const jsonString = JSON.stringify(state, null, 2);
     const blob = new Blob([jsonString], { type: "application/json" });
     const url = URL.createObjectURL(blob);
+
+    // Create link to activate click
     const link = document.createElement("a");
     link.href = url;
     link.download = "settings.json";
@@ -36,6 +43,8 @@ export default function MusicControls({}) {
     if (!file) return;
 
     const reader = new FileReader();
+
+    // Runs after the file is loaded. Sets the components state
     reader.onload = () => {
       const state = JSON.parse(reader.result);
 
@@ -44,7 +53,7 @@ export default function MusicControls({}) {
       setWaveForm(state.waveForm);
       setMute(state.mute);
 
-      alert("Loaded settings json file")
+      alert("Loaded settings json file");
     };
 
     reader.readAsText(file);
@@ -164,14 +173,23 @@ export default function MusicControls({}) {
       </div>
       <div className="d-flex justify-content-center m-3">
         <div className="form-check form-switch">
-          <input className="form-check-input" type="checkbox" role="switch" onChange={(e) => toggleMute(e.target.checked, globalEditorRef, strudelCode, setStrudelCode)}/>
-          <label className="form-check-label">
-            Mute
-          </label>
+          <input
+            className="form-check-input"
+            type="checkbox"
+            role="switch"
+            onChange={(e) =>
+              toggleMute(
+                e.target.checked,
+                globalEditorRef,
+                strudelCode,
+                setStrudelCode
+              )
+            }
+          />
+          <label className="form-check-label">Mute</label>
         </div>
       </div>
-      {/* TODO: accordion */}
-      <div>
+      <div className="mb-4">
         <h5 className="text-center mb-3">Settings</h5>
         <div className="d-flex justify-content-center">
           <button className="btn btn-primary me-2" onClick={saveJSONState}>
@@ -183,6 +201,101 @@ export default function MusicControls({}) {
             accept=".json"
             className="btn btn-primary ms-2"
           ></input>
+        </div>
+      </div>
+      <div className="accordion" id="accordionExample">
+        <div className="accordion-item">
+          <h2 className="accordion-header" id="headingOne">
+            <button
+              onClick={() => {
+                setShowAccordion1(!showAccordion1);
+              }}
+              className="accordion-button"
+              type="button"
+            >
+              Help
+            </button>
+          </h2>
+          <div
+            className={`accordion-collapse collapse${
+              showAccordion1 ? ".show" : ""
+            }`}
+          >
+            <div className="accordion-body">
+              <p>
+                Shrudel editor allows you to edit the code then run via the
+                process and play button. Open output and close output show the
+                editors out of the box features.
+              </p>
+              <p>
+                Song Selector allows you to select prexisting songs. These are
+                saved to your local storage.
+              </p>
+              <p>
+                Music Controls have a global gain and postgain setter. Mute
+                comments out the code and the settings can be saved and loaded
+                via the save and load buttons.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="accordion-item">
+          <h2 className="accordion-header" id="headingOne">
+            <button
+              onClick={() => {
+                setShowAccordion2(!showAccordion2);
+              }}
+              className="accordion-button"
+              type="button"
+            >
+              Quicks
+            </button>
+          </h2>
+          <div
+            className={`accordion-collapse collapse${
+              showAccordion2 ? ".show" : ""
+            }`}
+          >
+            <div className="accordion-body">
+              <p>
+                Depending on some songs, gain and postgain values changes arent
+                reflected unless you stop and play (rare scenarios)
+              </p>
+              <p>Waveform doesn't currently work.</p>
+              <p>
+                Post gain checkbox is just mutes. It is still a work in
+                progress.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="accordion-item">
+          <h2 className="accordion-header" id="headingOne">
+            <button
+              onClick={() => {
+                setShowAccordion3(!showAccordion3);
+              }}
+              className="accordion-button"
+              type="button"
+            >
+              Sample Song Links
+            </button>
+          </h2>
+          <div
+            className={`accordion-collapse collapse${
+              showAccordion3 ? ".show" : ""
+            }`}
+          >
+            <div className="accordion-body">
+              <p>
+                The below links provide Strudel.cc song code so you can add and
+                test the features.
+              </p>
+              <a href="https://strudel.cc/examples/">
+                https://strudel.cc/examples/
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
