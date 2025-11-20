@@ -1,14 +1,34 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, createElement } from "react";
 import { changeGain, changePostGain, toggleMute } from "../utils/preprocessors";
 import { AppContext } from "../App";
 
 export default function MusicControls({}) {
   const [gain, setGain] = useState(1);
   const [postGain, setPostGain] = useState(1);
-  const [waveform, setWaveForm] = useState("");
+  const [waveForm, setWaveForm] = useState("");
   const [mute, setMute] = useState(false);
   const { globalEditorRef, strudelCode, setStrudelCode } =
     useContext(AppContext);
+
+  function saveJSONState() {
+    const state = {
+      gain: gain,
+      postGain: postGain,
+      waveForm: waveForm,
+      mute: mute,
+      strudelCode: strudelCode,
+    }
+
+    const jsonString = JSON.stringify(state, null, 2);
+    const blob = new Blob([jsonString], {type: "application/json"});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "settings.json";
+    link.click();
+
+    URL.revokeObjectURL(url);
+  }
 
   function updateMute(value) {
     setMute(value);
@@ -114,7 +134,7 @@ export default function MusicControls({}) {
       <div>
         <h6 className="text-center mb-3">Settings</h6>
         <div className="d-flex justify-content-center">
-          <button className="btn btn-primary me-2">Save</button>
+          <button className="btn btn-primary me-2" onClick={saveJSONState}>Save</button>
           <button className="btn btn-primary ms-2">Load</button>
         </div>
       </div>
