@@ -26,8 +26,8 @@ export const AppContext = createContext(null);
 
 export default function StrudelDemo() {
   const globalEditorRef = useRef(null);
-  const [strudelCode, setStrudelCode] = useState();
-  const previousStrudelCode = usePreviousStrudelCode(strudelCode);
+  const [strudelCode, setStrudelCodeRoot] = useState();
+  const [previousStrudelCode, setPreviousStrudelCode] = useState();
   const hasRun = useRef(false);
 
   const appState = useMemo(
@@ -39,6 +39,14 @@ export default function StrudelDemo() {
     }),
     [strudelCode]
   );
+
+  function setStrudelCode(value) {
+      const serialised = JSON.stringify(strudelCode);
+      localStorage.setItem("PreviousSong", serialised);
+
+      setPreviousStrudelCode(strudelCode)
+    setStrudelCodeRoot(value);
+  }
 
   function initStrudelMirrorCanvas() {
     //Code copied from example: https://codeberg.org/uzu/strudel/src/branch/main/examples/codemirror-repl
@@ -72,23 +80,6 @@ export default function StrudelDemo() {
         ]);
       },
     });
-  }
-
-  function usePreviousStrudelCode(value) {
-    const strudelPreviousRef = useRef();
-
-    useEffect(() => {
-      if (!value) {
-        return;
-      }
-
-      const serialised = JSON.stringify(strudelCode);
-      localStorage.setItem("PreviousSong", serialised);
-
-      strudelPreviousRef.current = value;
-    }, [value]);
-
-    return strudelPreviousRef.current;
   }
 
   useEffect(() => {

@@ -7,7 +7,7 @@ export default function MusicControls({}) {
   const [postGain, setPostGain] = useState(1);
   const [waveForm, setWaveForm] = useState("");
   const [mute, setMute] = useState(false);
-  const { globalEditorRef, strudelCode, setStrudelCode } =
+  const { globalEditorRef, strudelCode, setStrudelCode, previousStrudelCode } =
     useContext(AppContext);
 
   function saveJSONState() {
@@ -165,7 +165,7 @@ export default function MusicControls({}) {
         <div className="form-check form-switch">
           <input className="form-check-input" type="checkbox" role="switch" />
           <label className="form-check-label">
-            Default switch checkbox input
+            Mute
           </label>
         </div>
       </div>
