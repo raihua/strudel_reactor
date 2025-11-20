@@ -16,11 +16,10 @@ export default function MusicControls({}) {
       postGain: postGain,
       waveForm: waveForm,
       mute: mute,
-      strudelCode: strudelCode,
-    }
+    };
 
     const jsonString = JSON.stringify(state, null, 2);
-    const blob = new Blob([jsonString], {type: "application/json"});
+    const blob = new Blob([jsonString], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
@@ -28,6 +27,26 @@ export default function MusicControls({}) {
     link.click();
 
     URL.revokeObjectURL(url);
+  }
+
+  function loadJSONState(event) {
+    const file = event.target.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const state = JSON.parse(reader.result);
+
+      setGain(state.gain);
+      setPostGain(state.postGain);
+      setWaveForm(state.waveForm);
+      setMute(state.mute);
+
+      alert("Loaded settings json file")
+    };
+
+    reader.readAsText(file);
   }
 
   function updateMute(value) {
@@ -102,25 +121,45 @@ export default function MusicControls({}) {
         />
       </div>
       <div className="d-flex justify-content-evenly">
-          <fieldset className="form-check">
-            <legend>Selected a waveform:</legend>
-            <div>
-              <input type="radio" name="waveform" value="sawtooth" onClick={() => setWaveForm("sawtooth")}/>
-              <label>Sawtooth</label>
-            </div>
-            <div>
-              <input type="radio" name="waveform" value="square" onClick={() => setWaveForm("square")} />
-              <label>Square</label>
-            </div>
-            <div>
-              <input type="radio" name="waveform" value="triangle" onClick={() => setWaveForm("triangle")}/>
-              <label>Triangle</label>
-            </div>
-            <div>
-              <input type="radio" name="waveform" value="sine" onClick={() => setWaveForm("sine")}/>
-              <label>Sine</label>
-            </div>
-          </fieldset>
+        <fieldset className="form-check">
+          <legend>Selected a waveform:</legend>
+          <div>
+            <input
+              type="radio"
+              name="waveform"
+              value="sawtooth"
+              onClick={() => setWaveForm("sawtooth")}
+            />
+            <label>Sawtooth</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="waveform"
+              value="square"
+              onClick={() => setWaveForm("square")}
+            />
+            <label>Square</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="waveform"
+              value="triangle"
+              onClick={() => setWaveForm("triangle")}
+            />
+            <label>Triangle</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="waveform"
+              value="sine"
+              onClick={() => setWaveForm("sine")}
+            />
+            <label>Sine</label>
+          </div>
+        </fieldset>
       </div>
       <div className="d-flex justify-content-center m-3">
         <div className="form-check form-switch">
@@ -134,8 +173,15 @@ export default function MusicControls({}) {
       <div>
         <h6 className="text-center mb-3">Settings</h6>
         <div className="d-flex justify-content-center">
-          <button className="btn btn-primary me-2" onClick={saveJSONState}>Save</button>
-          <button className="btn btn-primary ms-2">Load</button>
+          <button className="btn btn-primary me-2" onClick={saveJSONState}>
+            Save
+          </button>
+          <input
+            type="file"
+            onChange={loadJSONState}
+            accept=".json"
+            className="btn btn-primary ms-2"
+          ></input>
         </div>
       </div>
     </div>
