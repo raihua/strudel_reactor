@@ -1,9 +1,11 @@
 import { useEffect, useState, useContext } from "react";
-import { changeGain, toggleMute } from "../utils/preprocessors";
+import { changeGain, changePostGain, toggleMute } from "../utils/preprocessors";
 import { AppContext } from "../App";
 
 export default function MusicControls({}) {
   const [gain, setGain] = useState(1);
+  const [postGain, setPostGain] = useState(1);
+  const [waveform, setWaveForm] = useState("");
   const [mute, setMute] = useState(false);
   const { globalEditorRef, strudelCode, setStrudelCode } =
     useContext(AppContext);
@@ -18,6 +20,11 @@ export default function MusicControls({}) {
     changeGain(amount, globalEditorRef, strudelCode, setStrudelCode);
   }
 
+  function updatePostGain(amount) {
+    setPostGain(amount);
+    changePostGain(amount, globalEditorRef, strudelCode, setStrudelCode);
+  }
+
   function playMusic() {
     if (!strudelCode) {
       alert("No strudel code set.");
@@ -29,8 +36,12 @@ export default function MusicControls({}) {
 
   return (
     <div className="shadow p-3 mb-5 bg-white rounded">
-      <h5>Music Controls</h5>
-      <div className="btn-group" role="group" aria-label="Basic example">
+      <h5 className="text-center">Music Controls</h5>
+      <div
+        className="btn-group d-flex justify-content-center my-3"
+        role="group"
+        aria-label="Basic example"
+      >
         <button className="btn btn-success" onClick={playMusic}>
           Play
         </button>
@@ -41,8 +52,8 @@ export default function MusicControls({}) {
           Stop
         </button>
       </div>
-      <div>
-        <label className="form-label">Gain:</label>
+      <div className="d-flex justify-content-center flex-column">
+        <label className="text-center ">Gain</label>
         <input
           type="range"
           className="form-range"
@@ -51,8 +62,18 @@ export default function MusicControls({}) {
           value={gain}
           onChange={(e) => updateGain(e.target.value)}
         ></input>
+        <label className="text-center">Post Gain</label>
+        <input
+          type="range"
+          className="form-range"
+          min="0"
+          max="3"
+          value={postGain}
+          onChange={(e) => updatePostGain(e.target.value)}
+        ></input>
       </div>
       <div>
+        <label className="d-flex align-items-center">Post Gain</label>
         <input
           className="form-check-input mt-0"
           type="checkbox"
@@ -60,24 +81,42 @@ export default function MusicControls({}) {
           onClick={() => updateMute(!mute)}
         />
       </div>
-      <div>
-        <button className="btn btn-primary">Save</button>
-        <button className="btn btn-primary">Load</button>
+      <div className="d-flex justify-content-evenly">
+          <fieldset className="form-check">
+            <legend>Selected a waveform:</legend>
+            <div>
+              <input type="radio" name="waveform" value="sawtooth" onClick={() => setWaveForm("sawtooth")}/>
+              <label>Sawtooth</label>
+            </div>
+            <div>
+              <input type="radio" name="waveform" value="square" onClick={() => setWaveForm("square")} />
+              <label>Square</label>
+            </div>
+            <div>
+              <input type="radio" name="waveform" value="triangle" onClick={() => setWaveForm("triangle")}/>
+              <label>Triangle</label>
+            </div>
+            <div>
+              <input type="radio" name="waveform" value="sine" onClick={() => setWaveForm("sine")}/>
+              <label>Sine</label>
+            </div>
+          </fieldset>
       </div>
+      <div className="d-flex justify-content-center m-3">
+        <div className="form-check form-switch">
+          <input className="form-check-input" type="checkbox" role="switch" />
+          <label className="form-check-label">
+            Default switch checkbox input
+          </label>
+        </div>
+      </div>
+      {/* TODO: accordion */}
       <div>
-        <div className="form-check">
-          <input className="form-check-input" type="radio" />
-          <label className="form-check-label">Radio</label>
+        <h6 className="text-center mb-3">Settings</h6>
+        <div className="d-flex justify-content-center">
+          <button className="btn btn-primary me-2">Save</button>
+          <button className="btn btn-primary ms-2">Load</button>
         </div>
-        <div>
-          <div className="form-check form-switch">
-            <input className="form-check-input" type="checkbox" role="switch" />
-            <label className="form-check-label">
-              Default switch checkbox input
-            </label>
-          </div>
-        </div>
-        {/* TODO: accordion */}
       </div>
     </div>
   );

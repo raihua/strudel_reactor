@@ -11,7 +11,21 @@ export function changeGain(amount, globalEditorRef, strudelCode, setStrudelCode)
     console.log(amount);
     let code = strudelCode;
     console.log(code);
-    let newCode = code.replace(/\.gain\([^)]*\)/g, `.gain(${amount})`);
+    let newCode = code.replace(/\.gain\(.*\)/g, `.gain(${amount})`);
+    console.log(newCode);
+    setStrudelCode(newCode);
+    globalEditorRef.current.setCode(newCode);
+    globalEditorRef.current.evaluate();
+}
+
+export function changePostGain(amount, globalEditorRef, strudelCode, setStrudelCode) {
+  if (!strudelCode) {
+    return;
+  }
+    console.log(amount);
+    let code = strudelCode;
+    console.log(code);
+    let newCode = code.replace(/\.postgain\(.*\)/g, `.postgain(${amount})`);
     console.log(newCode);
     setStrudelCode(newCode);
     globalEditorRef.current.setCode(newCode);
