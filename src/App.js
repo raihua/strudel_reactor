@@ -35,6 +35,7 @@ export default function StrudelDemo() {
       globalEditorRef,
       strudelCode,
       setStrudelCode,
+      previousStrudelCode
     }),
     [strudelCode]
   );
