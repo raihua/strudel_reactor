@@ -123,7 +123,7 @@ export default function MusicControls({}) {
       </div>
       <div className="d-flex justify-content-evenly">
         <fieldset className="form-check">
-          <legend>Selected a waveform:</legend>
+          <h5>Selected a waveform:</h5>
           <div>
             <input
               type="radio"
@@ -172,7 +172,7 @@ export default function MusicControls({}) {
       </div>
       {/* TODO: accordion */}
       <div>
-        <h6 className="text-center mb-3">Settings</h6>
+        <h5 className="text-center mb-3">Settings</h5>
         <div className="d-flex justify-content-center">
           <button className="btn btn-primary me-2" onClick={saveJSONState}>
             Save
