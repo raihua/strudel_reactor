@@ -4,49 +4,64 @@ export function processStudelCode(globalEditorRef, strudelCode) {
   }
 }
 
-export function changeGain(amount, globalEditorRef, strudelCode, setStrudelCode) {
+export function changeGain(
+  amount,
+  globalEditorRef,
+  strudelCode,
+  setStrudelCode
+) {
   if (!strudelCode) {
     return;
   }
-    console.log(amount);
-    let code = strudelCode;
-    console.log(code);
-    let newCode = code.replace(/\.gain\(.*\)/g, `.gain(${amount})`);
-    console.log(newCode);
-    setStrudelCode(newCode);
-    globalEditorRef.current.setCode(newCode);
-    globalEditorRef.current.evaluate();
+  console.log(amount);
+  let code = strudelCode;
+  console.log(code);
+  let newCode = code.replace(/\.gain\(.*\)/g, `.gain(${amount})`);
+  console.log(newCode);
+  setStrudelCode(newCode);
+  globalEditorRef.current.setCode(newCode);
+  globalEditorRef.current.evaluate();
 }
 
-export function changePostGain(amount, globalEditorRef, strudelCode, setStrudelCode) {
+export function changePostGain(
+  amount,
+  globalEditorRef,
+  strudelCode,
+  setStrudelCode
+) {
   if (!strudelCode) {
     return;
   }
-    console.log(amount);
-    let code = strudelCode;
-    console.log(code);
-    let newCode = code.replace(/\.postgain\(.*\)/g, `.postgain(${amount})`);
-    console.log(newCode);
-    setStrudelCode(newCode);
-    globalEditorRef.current.setCode(newCode);
-    globalEditorRef.current.evaluate();
+  console.log(amount);
+  let code = strudelCode;
+  console.log(code);
+  let newCode = code.replace(/\.postgain\(.*\)/g, `.postgain(${amount})`);
+  console.log(newCode);
+  setStrudelCode(newCode);
+  globalEditorRef.current.setCode(newCode);
+  globalEditorRef.current.evaluate();
 }
 
-export function toggleMute(value, globalEditorRef, strudelCode, setStrudelCode) {
-  if (!strudelCode) {
-    return;
+export function toggleMute(
+  value,
+  globalEditorRef,
+  strudelCode,
+  setStrudelCode
+) {
+  if (!strudelCode) return;
+
+  let code = strudelCode;
+  let newCode = "";
+
+  if (value) {
+    // Prepend // to all lines
+    newCode = code.replace(/^(.*)$/gm, "// $1");
+  } else {
+    // Remove the prepended //
+    newCode = code.replace(/^\s*\/\/\s?(.*)$/gm, "$1");
   }
-    console.log(value);
-    let code = strudelCode;
-    console.log(code);
-    let newCode = "";
-    if (value) {
-      newCode = code + "\nmute";
-    } else {
-      newCode = code.replace(/\n\mute/, '');
-    }
-    console.log(newCode);
-    setStrudelCode(newCode);
-    globalEditorRef.current.setCode(newCode);
-    globalEditorRef.current.evaluate();
+
+  setStrudelCode(newCode);
+  globalEditorRef.current.setCode(newCode);
+  globalEditorRef.current.evaluate();
 }

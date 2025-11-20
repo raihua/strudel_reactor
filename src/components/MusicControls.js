@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext, createElement } from "react";
 import { changeGain, changePostGain, toggleMute } from "../utils/preprocessors";
 import { AppContext } from "../App";
+import { set } from "@strudel/core";
 
 export default function MusicControls({}) {
   const [gain, setGain] = useState(1);
@@ -163,7 +164,7 @@ export default function MusicControls({}) {
       </div>
       <div className="d-flex justify-content-center m-3">
         <div className="form-check form-switch">
-          <input className="form-check-input" type="checkbox" role="switch" />
+          <input className="form-check-input" type="checkbox" role="switch" onChange={(e) => toggleMute(e.target.checked, globalEditorRef, strudelCode, setStrudelCode)}/>
           <label className="form-check-label">
             Mute
           </label>
