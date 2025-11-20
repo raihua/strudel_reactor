@@ -21,15 +21,22 @@ import { registerSoundfonts } from "@strudel/soundfonts";
 import StrudelEditor from "./components/StrudelEditor";
 import MusicControls from "./components/MusicControls";
 import SongSelector from "./components/SongSelector";
+import console_monkey_patch from "./console-monkey-patch";
+import { D3Graph } from "./components/D3Graph";
 
 export const AppContext = createContext(null);
 
+const handleD3Data = (event) => {
+    console.log(event.detail);
+};
+
 export default function StrudelDemo() {
-  const globalEditorRef = useRef(null);
+  const globalEditorRef = useRef(null); // Strudels global editor
   const [strudelCode, setStrudelCodeRoot] = useState();
   const [previousStrudelCode, setPreviousStrudelCode] = useState();
   const hasRun = useRef(false);
 
+  // AppContext provider app state
   const appState = useMemo(
     () => ({
       globalEditorRef,
@@ -51,6 +58,8 @@ export default function StrudelDemo() {
   function initStrudelMirrorCanvas() {
     //Code copied from example: https://codeberg.org/uzu/strudel/src/branch/main/examples/codemirror-repl
     //init canvas
+    document.addEventListener("d3Data", handleD3Data);
+    console_monkey_patch()
     const canvas = document.getElementById("roll");
     canvas.width = canvas.width * 2;
     canvas.height = canvas.height * 2;
@@ -98,6 +107,8 @@ export default function StrudelDemo() {
             <StrudelEditor />
           </div>
           <div className="col-6">
+            {/* TODO: d3 graph */}
+            {/* <D3Graph /> */}
             <SongSelector />
             <MusicControls />
           </div>
