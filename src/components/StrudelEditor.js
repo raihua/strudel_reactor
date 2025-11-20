@@ -3,7 +3,7 @@ import { AppContext } from "../App";
 
 export default function StrudelEditor({
 }) {
-  const [showOutput, setShowOutput] = useState(false);
+  const [showOutput, setShowOutput] = useState(true);
   const {globalEditorRef, strudelCode, setStrudelCode} = useContext(AppContext);
 
   function processPlay() {
